@@ -5,9 +5,11 @@ namespace VisitorCommentsApp.Models
     public class Visitor
     {
         public int Id { get; set; }
+        [Required] 
         public string? Name { get; set; }
 
         public string? Address { get; set; }
+        [Required]
         public string? Email { get; set; }
         [Display(Name = "Phone Number 1")]
         public string? Phone1 { get; set; }
