@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VisitorCommentsApp.Data;
+using VisitorCommentsApp.Models;
 
-namespace VisitorCommentsApp.Models
+namespace VisitorCommentsApp
 {
     public class VisitorsController : Controller
     {
@@ -34,14 +35,14 @@ namespace VisitorCommentsApp.Models
                 return NotFound();
             }
 
-            var visitors = await _context.Visitors
+            var visitor = await _context.Visitors
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (visitors == null)
+            if (visitor == null)
             {
                 return NotFound();
             }
 
-            return View(visitors);
+            return View(visitor);
         }
 
         // GET: Visitors/Create
@@ -55,15 +56,15 @@ namespace VisitorCommentsApp.Models
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,Email,Phone1,Phone2,Comments")] Visitor visitors)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,Email,Phone1,Phone2,Comments,Rating")] Visitor visitor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(visitors);
+                _context.Add(visitor);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Thankyou));
             }
-            return View(visitors);
+            return View(visitor);
         }
 
         // GET: Visitors/Edit/5
@@ -74,12 +75,12 @@ namespace VisitorCommentsApp.Models
                 return NotFound();
             }
 
-            var visitors = await _context.Visitors.FindAsync(id);
-            if (visitors == null)
+            var visitor = await _context.Visitors.FindAsync(id);
+            if (visitor == null)
             {
                 return NotFound();
             }
-            return View(visitors);
+            return View(visitor);
         }
 
         // POST: Visitors/Edit/5
@@ -87,9 +88,9 @@ namespace VisitorCommentsApp.Models
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Email,Phone1,Phone2,Comments")] Visitor visitors)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Email,Phone1,Phone2,Comments,Rating")] Visitor visitor)
         {
-            if (id != visitors.Id)
+            if (id != visitor.Id)
             {
                 return NotFound();
             }
@@ -98,12 +99,12 @@ namespace VisitorCommentsApp.Models
             {
                 try
                 {
-                    _context.Update(visitors);
+                    _context.Update(visitor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VisitorsExists(visitors.Id))
+                    if (!VisitorExists(visitor.Id))
                     {
                         return NotFound();
                     }
@@ -114,7 +115,7 @@ namespace VisitorCommentsApp.Models
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(visitors);
+            return View(visitor);
         }
 
         // GET: Visitors/Delete/5
@@ -125,14 +126,14 @@ namespace VisitorCommentsApp.Models
                 return NotFound();
             }
 
-            var visitors = await _context.Visitors
+            var visitor = await _context.Visitors
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (visitors == null)
+            if (visitor == null)
             {
                 return NotFound();
             }
 
-            return View(visitors);
+            return View(visitor);
         }
 
         // POST: Visitors/Delete/5
@@ -144,17 +145,22 @@ namespace VisitorCommentsApp.Models
             {
                 return Problem("Entity set 'VisitorCommentsAppContext.Visitors'  is null.");
             }
-            var visitors = await _context.Visitors.FindAsync(id);
-            if (visitors != null)
+            var visitor = await _context.Visitors.FindAsync(id);
+            if (visitor != null)
             {
-                _context.Visitors.Remove(visitors);
+                _context.Visitors.Remove(visitor);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VisitorsExists(int id)
+        public IActionResult Thankyou()
+        {
+            return RedirectToAction(nameof(Create));
+        }
+
+        private bool VisitorExists(int id)
         {
           return (_context.Visitors?.Any(e => e.Id == id)).GetValueOrDefault();
         }

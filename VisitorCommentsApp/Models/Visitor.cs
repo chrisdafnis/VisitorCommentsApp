@@ -15,5 +15,6 @@ namespace VisitorCommentsApp.Models
         public string? Phone2 { get; set; }
         [DataType(DataType.MultilineText)] 
         public string? Comments { get; set; }
+        public int? Rating { get; set; }
     }
 }

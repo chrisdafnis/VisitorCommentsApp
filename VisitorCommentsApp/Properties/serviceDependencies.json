@@ -1,8 +1,7 @@
 {
   "dependencies": {
-    "mssql1": {
-      "type": "mssql",
-      "connectionId": "ConnectionStrings:VisitorCommentsAppContext"
+    "secrets1": {
+      "type": "secrets"
     }
   }
 }

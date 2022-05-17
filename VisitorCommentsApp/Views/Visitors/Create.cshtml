@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Visitor Comments</h1>
+<h1>Please Leave a comment</h1>
 
-<h4>Please leave your details and any comments</h4>
+<h4>Leave a comment, and rate your visit</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -39,11 +39,27 @@
             </div>
             <div class="form-group">
                 <label asp-for="Comments" class="control-label"></label>
-                <textarea asp-for="Comments" class="form-control" text-wrap:normal" type="text" placeholder="Please add your experience here"></textarea>
+                <textarea asp-for="Comments" class="form-control"></textarea>
                 <span asp-validation-for="Comments" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.RadioButtonFor(model => model.Rating, "1", new { id = "rating-1" }) <label for="rating-1">1</label>
+                    @Html.RadioButtonFor(model => model.Rating, "2", new { id = "rating-2" }) <label for="rating-2">2</label>
+                    @Html.RadioButtonFor(model => model.Rating, "3", new { id = "rating-3" }) <label for="rating-3">3</label>
+                    @Html.RadioButtonFor(model => model.Rating, "4", new { id = "rating-4" }) <label for="rating-4">4</label>
+                    @Html.RadioButtonFor(model => model.Rating, "5", new { id = "rating-5" }) <label for="rating-5">5</label>
+                    @Html.RadioButtonFor(model => model.Rating, "6", new { id = "rating-6" }) <label for="rating-6">6</label>
+                    @Html.RadioButtonFor(model => model.Rating, "7", new { id = "rating-7" }) <label for="rating-7">7</label>
+                    @Html.RadioButtonFor(model => model.Rating, "8", new { id = "rating-8" }) <label for="rating-8">8</label>
+                    @Html.RadioButtonFor(model => model.Rating, "9", new { id = "rating-9" }) <label for="rating-9">9</label>
+                    @Html.RadioButtonFor(model => model.Rating, "10", new { id = "rating-10" }) <label for="rating-10">10</label>
+                    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Leave Comment" class="btn btn-primary" />
             </div>
         </form>
     </div>

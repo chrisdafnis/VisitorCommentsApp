@@ -19,7 +19,8 @@ namespace VisitorCommentsApp.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rating = table.Column<string>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

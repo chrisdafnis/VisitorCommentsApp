@@ -24,7 +24,8 @@ namespace VisitorCommentsApp.Models
                         Email = "john@smith.com",
                         Phone1 = "1234567890",
                         Phone2 = "0987654321",
-                        Comments = "Excellent coffee!"
+                        Comments = "Excellent coffee!",
+                        Rating = 8
                     },
 
                     new Visitor
@@ -34,7 +35,8 @@ namespace VisitorCommentsApp.Models
                         Email = "paul@jones.com",
                         Phone1 = "12121212",
                         Phone2 = "34343434",
-                        Comments = "Very productive meeting"
+                        Comments = "Very productive meeting",
+                        Rating = 9
                     },
 
                     new Visitor
@@ -44,7 +46,8 @@ namespace VisitorCommentsApp.Models
                         Email = "alan@brown.com",
                         Phone1 = "878787878787",
                         Phone2 = "454545454545",
-                        Comments = "Great facilities"
+                        Comments = "Great facilities",
+                        Rating = 7
                     }
                 );
                 context.SaveChanges();
